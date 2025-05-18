@@ -9,7 +9,7 @@ for i, pelicula in enumerate(nombre_peliculas, start=1):
 
 while not fin_programa:
     try:
-        num_pelicula = int(input("\nIngrese el número de película que quiere ver (-1 para salir): "))
+        num_pelicula = int(input("Ingrese el número de película que quiere ver (-1 para salir): "))
 
         if num_pelicula == -1:
             fin_programa = True
