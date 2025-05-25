@@ -1,22 +1,44 @@
-nombre_peliculas = ["Toy Story 4", "Donde están las rubias", "Ted 2", "Cars 3"]
-capacidad_salas = [40, 20, 30, 40]  # Capacidad por sala
+# Pregunta si es superusuario
+super_usuario = input("Ingrese la letra 'S' para ingresar como superusuario (o cualquier otra para continuar como cliente): ").upper()
 
+if super_usuario == "S":
+    peliculas_input = input("Ingrese los nombres de las películas separados por coma: ")
+    nombre_peliculas = [p.strip() for p in peliculas_input.split(",")]
+
+    capacidad_salas = []
+    for pelicula in nombre_peliculas:
+        while True:
+            try:
+                capacidad = int(input(f"Ingrese la capacidad de la sala para '{pelicula}': "))
+                if capacidad > 0:
+                    capacidad_salas.append(capacidad)
+                    break
+                else:
+                    print("La capacidad debe ser mayor que cero.")
+            except ValueError:
+                print("Por favor, ingrese un número válido.")
+else:
+    # Cartelera por defecto
+    nombre_peliculas = ["Toy Story 4", "Donde están las rubias", "Ted 2", "Cars 3"]
+    capacidad_salas = [40, 20, 30, 40]
+
+# Mostrar cartelera
 fin_programa = False
-
-print("Cartelera:")
+print("\nCartelera:")
 for i, pelicula in enumerate(nombre_peliculas, start=1):
     print(f"{i}. {pelicula} (Entradas disponibles: {capacidad_salas[i-1]})")
 
+# Bucle principal de reserva
 while not fin_programa:
     try:
-        num_pelicula = int(input("Ingrese el número de película que quiere ver (-1 para salir): "))
+        num_pelicula = int(input("\nIngrese el número de película que quiere ver (-1 para salir): "))
 
         if num_pelicula == -1:
             fin_programa = True
             print("Programa finalizado.")
             break
 
-        if num_pelicula < 1 or num_pelicula > 4:
+        if num_pelicula < 1 or num_pelicula > len(nombre_peliculas):
             print("Error: número de película inválido.")
             continue
 
@@ -51,7 +73,7 @@ while not fin_programa:
                 print("Error: ingrese un número válido para el horario.")
 
         # Confirmación
-        print("¡Reserva exitosa!")
+        print("\n¡Reserva exitosa!")
         print(f"Película: {nombre_peliculas[indice]}")
         print(f"Fecha: {fecha_reserva}")
         print(f"Horario: {horario_reserva}")
